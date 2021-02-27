@@ -1,0 +1,42 @@
+.switcher{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.switcher .container{
+    display: flex;
+    flex-flow: wrap column;
+    align-items: center;
+    width: 80%;
+}
+
+.container .title{
+    color: white;
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.container .text{
+    color: white;
+    opacity: .7;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.container button{
+    font-size: 23px;
+    width: 80%;
+    min-width: 150px;
+    color: white;
+    background-color: inherit;
+    border: 2px solid white;
+    border-radius: 25px;
+    margin-top: 50px;
+    padding: 10px 50px 10px 50px;
+    outline: none;
+    opacity: .7;
+    cursor: pointer;
+}
