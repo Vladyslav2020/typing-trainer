@@ -1,0 +1,16 @@
+.nav-block{
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-block .nav-item{
+    color: rgb(41, 41, 41);
+    font-size: 20px;
+    text-decoration: none;
+    margin-left: 50px;
+}
+
+.nav-block .nav-item:hover{
+    color: #1eb8b8;
+    transition: color ease-out 300ms;
+}

@@ -5,8 +5,10 @@ import SignIn from '../SignIn';
 import Switcher from '../Switcher';
 import './index.css';
 
+type AuthType = 'login' | 'register';
+
 const Auth: React.FC< AuthProps > = (props) => {
-    const [type, setType] = useState('login');
+    const [type, setType] = useState<AuthType>('login');
     function clickHandler(): void{
         setType(prevType => prevType === 'login'? 'register': 'login');
     }

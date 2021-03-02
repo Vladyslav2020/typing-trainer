@@ -1,0 +1,28 @@
+.profile-menu{
+    color: #1eb8b8;
+    font-size: 23px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.profile-menu:hover{
+    color: rgb(100, 73, 255);
+    transition: color ease-out 300ms;
+}
+
+.link-signIn{
+    font-size: 23px;
+    background-color: #1eb8b8;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.link-signIn .text{
+    text-decoration: none;
+    color: white;
+}
+
+.link-signIn:hover{
+    background-color: rgb(100, 73, 255);
+    transition: background-color 300ms ease-out;
+}

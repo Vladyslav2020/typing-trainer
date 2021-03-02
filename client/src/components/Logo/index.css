@@ -1,0 +1,14 @@
+.logo{
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.logo .first{
+    color: rgb(100, 73, 255);
+}
+
+.logo .second{
+    color: rgb(207, 207, 207);
+}
