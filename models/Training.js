@@ -3,16 +3,18 @@ const { Schema, model } = require('mongoose');
 const Training = new Schema({
     number: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     text: {
         type: String,
     },
-    numberPossibleErors: {
+    numberPossibleErrors: {
         type: Number,
         default: 2
     }

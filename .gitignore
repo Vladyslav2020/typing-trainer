@@ -3,3 +3,4 @@ default.json
 config
 *.docx
 *.doc
+*.tmp

@@ -3,7 +3,8 @@ const { Schema, Types, model } = require('mongoose');
 const TrainingUser = new Schema({
     userId: {
         type: Types.ObjectId,
-        required: true
+        required: true,
+        ref: "User"
     },
     trainingNumber: {
         type: Number,

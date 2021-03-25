@@ -15,7 +15,7 @@ const User = new Schema({
         required: true
     },
     registerDate: {
-        type: Number,
+        type: String,
         required: true
     },
     numberCompletedTrainings: {
@@ -30,6 +30,10 @@ const User = new Schema({
         type: Number,
         default: 0
     },
+    numberStars:{
+        type: Number,
+        default: 0
+    },
     rank: {
         type: String,
         default: "beginner"
@@ -40,6 +44,7 @@ const User = new Schema({
     },
     trainingsList: {
         type: Array,
+        ref: "TrainingUser",
         default: []
     },
     speedTypingRecord: {

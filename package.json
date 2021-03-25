@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-server": "node index",
+    "start-server": "nodemon index",
     "start-client": "npm run start --prefix client"
   },
   "keywords": [],

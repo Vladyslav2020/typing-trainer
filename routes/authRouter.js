@@ -3,6 +3,7 @@ const config = require('config');
 const { check, validationResult  } = require('express-validator');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const TrainingUser = require("../models/TrainingUser");
 const jwt = require('jsonwebtoken');
 
 const router = Router();
@@ -27,6 +28,7 @@ router.post('/register',
                 return res.status(400).json({message: 'This user already exists'});
             }
             const hashedPassword = await bcrypt.hash(password, 12);
+
             const newUser = new User({
                 name, 
                 email, 
@@ -36,15 +38,30 @@ router.post('/register',
                 numberFriends: 0, 
                 rank: "beginner", 
                 friendList: [], 
-                trainingList: [], 
+                trainingsList: [], 
                 speedTypingRecord: 0
             });
             await newUser.save();
-            json.status(200).json({message: "New user saved"});
+            const trainingsList = [];
+            for(let i = 0; i < 10; i++){
+                let training = new TrainingUser({
+                    userId: newUser._id,
+                    trainingNumber: i + 1,
+                    completed: false,
+                    numberAttempts: 0,
+                    spendedTime: 0,
+                    speed: 0,
+                    numberStars: 0
+                });
+                await training.save();
+                trainingsList.push(training.id);
+            }
+            await User.updateOne({_id: newUser._id}, {trainingsList});
+            res.status(200).json({message: "New user saved"});
         }
         catch(err){
             res.status(500).json({message: "Server error"});
-            console.log("Server error", err.message);
+            console.log("Auth register error:", err.message);
         }
 });
 
@@ -84,7 +101,7 @@ router.post('/login',
         }
         catch(err){
             res.status(500).json({message: "Server error"});
-            console.log("Server error", err.message);
+            console.log("Auth login router error:", err.message);
         }
 });
 
