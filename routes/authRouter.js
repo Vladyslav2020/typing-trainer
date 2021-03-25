@@ -1,11 +1,11 @@
-const { Route } = require('express');
+const { Router } = require('express');
+const config = require('config');
+const { check, validationResult  } = require('express-validator');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const config = require('config');
-const { check, validationResult  } = require('express-validator');
 
-const router = Route();
+const router = Router();
 
 router.post('/register',
     [
@@ -27,7 +27,18 @@ router.post('/register',
                 return res.status(400).json({message: 'This user already exists'});
             }
             const hashedPassword = await bcrypt.hash(password, 12);
-            const newUser = new User({name, email, password: hashedPassword});
+            const newUser = new User({
+                name, 
+                email, 
+                password: hashedPassword, 
+                registerDate: (new Date).toISOString(),
+                numberCompletedTrainings: 0, 
+                numberFriends: 0, 
+                rank: "beginner", 
+                friendList: [], 
+                trainingList: [], 
+                speedTypingRecord: 0
+            });
             await newUser.save();
             json.status(200).json({message: "New user saved"});
         }
@@ -56,13 +67,25 @@ router.post('/login',
                 return res.status(400).json({message: "Incorrect email or password, please try again"});
             }
             const token = jwt.sign({userId: user.id}, config.get('jwtSecretKey'), {expiresIn: '2h'});
-            res.status(200).json({message: {token, id: user.id, name: user.name}});
+            res.status(200).json({
+                message: {
+                    token, 
+                    id: user.id, 
+                    name: user.name, 
+                    email: user.email, 
+                    registerDate: user.registerDate,
+                    numberCompletedTrainings: user.numberCompletedTrainings,
+                    numberFriends: user.numberFriends,
+                    rank: user.rank,
+                    friendList: user.friendList,
+                    speedTypingRecord: user.speedTypingRecord
+                }
+            });
         }
         catch(err){
             res.status(500).json({message: "Server error"});
             console.log("Server error", err.message);
         }
 });
-
 
 module.exports = router;

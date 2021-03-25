@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import { signIn } from '../../redux/actions';
 import './index.css';
 
-const SignIn: React.FC = () => {
+const mapDispatchToProps = {
+    signIn
+}
+
+const connector = connect(null, mapDispatchToProps);
+
+type TProps = ConnectedProps<typeof connector>;
+
+const SignIn: React.FC<TProps> = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     function changeHandler(type: string, event: React.ChangeEvent<HTMLInputElement>): void{
@@ -12,9 +22,14 @@ const SignIn: React.FC = () => {
             setPassword(event.target.value);
         }
     }
+
+    function clickHandler(event: React.MouseEvent<HTMLButtonElement>): void{
+        event.preventDefault();
+        props.signIn(email, password);
+    }
     return (
         <div className = "form-block">
-            <div className = "head">Sign to typing-trainer</div>
+            <div className = "head">Sign in to typing-trainer</div>
             <form className = "form">
                 <div className = "form-item">
                     <i className="far fa-envelope"></i>
@@ -35,11 +50,11 @@ const SignIn: React.FC = () => {
                     />
                 </div>
 
-                <button>Sign In</button>
+                <button onClick = {clickHandler}>Sign In</button>
                 <div className = 'forgot-password'>Forgot your password?</div>
             </form>
         </div>
     );
 }
 
-export default SignIn;
+export default connector(SignIn);

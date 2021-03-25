@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-server": "node index"
+    "start-server": "node index",
+    "start-client": "npm run start --prefix client"
   },
   "keywords": [],
   "author": "",

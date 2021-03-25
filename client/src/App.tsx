@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import MainPage from "./pages/MainPage/index";
 import HomePage from "./pages/HomePage/index";
-import { AppProps } from "./interfaces/App";
+import { AppProps } from "./AppI";
 import Auth from "./components/Auth";
 import AuthPage from './pages/AuthPage';
 

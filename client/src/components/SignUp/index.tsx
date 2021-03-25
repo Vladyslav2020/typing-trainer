@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import { register } from '../../redux/actions';
 import './index.css';
 
-const Register: React.FC = () => {
+const mapDispatchToProps = {
+    register
+}
+
+const connector = connect(null, mapDispatchToProps);
+
+type TProps = ConnectedProps<typeof connector>
+
+const Register: React.FC<TProps> = (props) => {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -16,6 +26,12 @@ const Register: React.FC = () => {
         if (type === 'repeatPassword')
             setRepeatPassword(event.target.value);
     }
+
+    function clickHandler(event: React.MouseEvent<HTMLButtonElement>){
+        event.preventDefault();
+        props.register(name, email, password);
+    }
+
     return (
         <div className = "form-block">
             <div className = "head">Create an Account</div>
@@ -56,10 +72,10 @@ const Register: React.FC = () => {
                         onChange = {changeHandler.bind(null, 'repeatPassword')}
                     />
                 </div>
-                <button>Sign Up</button>
+                <button onClick = {clickHandler}>Sign Up</button>
             </form>
         </div>
     );
 }
 
-export default Register;
+export default connector(Register);

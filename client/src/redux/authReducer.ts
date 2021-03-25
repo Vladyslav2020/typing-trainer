@@ -1,6 +1,7 @@
 import { Reducer } from 'redux';
 import { ActionInterface } from '../interfaces/actions';
-import { AuthState } from '../interfaces/authReducerInterfaces';
+import { AuthState } from '../interfaces/authReducerI';
+import { SET_AUTH_DATA } from './types';
 
 const initialState : AuthState = {
     name: "", 
@@ -8,8 +9,9 @@ const initialState : AuthState = {
     token: ""
 }
 
-export const authReducer: Reducer<AuthState, ActionInterface> = (state = initialState, action) => {
+export const authReducer: Reducer<AuthState, ActionInterface<AuthState> > = (state = initialState, action) => {
     switch (action.type){
+        case SET_AUTH_DATA: return {...state, name: action.payload?.name, email: action.payload?.email, token: action.payload?.token} as AuthState;
         default: return state;
     }
 }
