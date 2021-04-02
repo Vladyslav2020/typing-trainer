@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { AuthProps } from './Auth';
+import { AuthProps } from './interfaces';
 import SignUp from '../SignUp';
 import SignIn from '../SignIn';
 import Switcher from '../Switcher';

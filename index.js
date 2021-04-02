@@ -11,6 +11,7 @@ const competition = require("./models/Competition");
 const app = express();
 const PORT = config.get('port') || 3000;
 
+app.use(express.urlencoded({extended: true}));
 app.use(express.json({extended: true}));
 
 (async () => {

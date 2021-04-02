@@ -2,6 +2,7 @@ const { Router } = require('express');
 const auth = require("../middleware/authMiddleware");
 const TrainingUser = require("../models/TrainingUser");
 const User = require("../models/User");
+const Training = require("../models/Training");
 
 const router = Router();
 
@@ -12,8 +13,11 @@ router.get("/get", auth, async(req, res) => {
         if (!data){
             return res.status(400).json({message: "Incorrect data"});
         }
+        const trainingInfo = await Training.findOne({number: data.trainingNumber});
+        const title = trainingInfo.title;
         res.status(200).json({message: {
             trainingNumber: data.trainingNumber,
+            title,
             completed: data.completed,
             numberAttempts: data.numberAttempts,
             spendedTime: data.spendedTime,

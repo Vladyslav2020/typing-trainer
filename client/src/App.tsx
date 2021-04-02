@@ -1,30 +1,58 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
+import { connect, ConnectedProps } from 'react-redux';
 import MainPage from "./pages/MainPage/index";
 import HomePage from "./pages/HomePage/index";
-import { AppProps } from "./AppI";
-import Auth from "./components/Auth";
 import AuthPage from './pages/AuthPage';
+import TrainingsPage from './pages/TrainingsPage';
+import { ApplicationState } from './interfaces/rootReducerI';
+import { setAuthData } from './redux/actions';
 
-const App: React.FC<AppProps> = (props) => {
+const mapStateToProps = (state: ApplicationState) => ({auth: state.auth})
+const mapDispatchToProps = {
+    setAuthData
+};
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropTypes = ConnectedProps<typeof connector>;
+
+const App: React.FC<PropTypes> = (props) => {
+    useEffect(() => {
+        console.log("Auth:", props.auth);
+        const data = localStorage.getItem("auth");
+        if (typeof data === 'string')
+            props.setAuthData(JSON.parse(data));
+        console.log("isAutenticated:", !!props.auth.token)
+    }, [props.auth.id, props.auth.token]);
     return (  
         <BrowserRouter>
-            <Switch>
-                <Route component = {AuthPage} path = "/auth" />
-                {props.isAuthenticated? 
-                    <>
-                        <Route component = {MainPage} path = "/main" />
-                        <Route component = {HomePage} path = "/home" />
+            <>
+                {!!props.auth.token? 
+                    <Switch>
+                        <Route path="/main" exact>
+                            <MainPage />
+                        </Route>
+                        <Route path="/home" exact>
+                            <HomePage />
+                        </Route>
+                        <Route path="/trainings" exact>
+                            <TrainingsPage />
+                        </Route>
                         <Redirect to = "/home" />
-                    </>:
-                    <>
-                        <Route component = {MainPage} path = "/main"/>
+                    </Switch>:
+                    <Switch>
+                        <Route path="/main" exact>
+                            <MainPage />
+                        </Route>
+                        <Route path="/auth" exact>
+                            <AuthPage />
+                        </Route>
                         <Redirect to = "/main"/>
-                    </>
+                    </Switch>
                 }
-            </Switch>
+            </>
         </BrowserRouter>
     )
 }
 
-export default App;
+export default connector(App);

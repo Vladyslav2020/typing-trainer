@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import { SwitcherProps } from './Switcher';
+import { SwitcherProps } from './interfaces';
 
 const Switcher: React.FC< SwitcherProps > = (props) => {
     return (

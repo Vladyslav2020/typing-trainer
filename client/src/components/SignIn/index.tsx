@@ -25,7 +25,7 @@ const SignIn: React.FC<TProps> = (props) => {
 
     function clickHandler(event: React.MouseEvent<HTMLButtonElement>): void{
         event.preventDefault();
-        props.signIn(email, password);
+        props.signIn({email, password});
     }
     return (
         <div className = "form-block">

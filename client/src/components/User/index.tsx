@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { UserProps } from './User';
+import { UserProps } from './interfaces';
 import './index.css';
 
 const User: React.FC<UserProps> = (props) => {

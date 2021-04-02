@@ -1,0 +1,49 @@
+a{
+    text-decoration: none;
+}
+.user-training-item{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px 15px 10px;
+    border-bottom: 1px solid rgb(220, 232, 255);
+    font-size: 25px;
+    color: rgb(66, 66, 66);
+    cursor:pointer;
+    background-color: white;
+}
+
+.user-training-item:hover{
+    /* background-color: #eaffee; */
+    background-color: #eff7f7;
+    color: #1eb8b8;
+}
+
+.user-training-item:hover .completed{
+    color: red;
+}
+
+.user-training-item:hover .user-stars{
+    color: rgb(170, 170, 170);
+}
+
+.user-training-number{
+    
+}
+
+.user-training-item .user-stars{
+    color: rgb(209, 209, 209);
+}
+
+.user-training-item .user-stars .active{
+    color: gold;
+}
+
+.user-stars .completed{
+    display: inline;
+    margin-left: 10px;
+    color: rgb(255, 149, 149);
+}
+
+.user-stars .completed .completed{
+    color: #1ba94c
+}

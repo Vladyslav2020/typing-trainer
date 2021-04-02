@@ -29,7 +29,7 @@ const Register: React.FC<TProps> = (props) => {
 
     function clickHandler(event: React.MouseEvent<HTMLButtonElement>){
         event.preventDefault();
-        props.register(name, email, password);
+        props.register({name, email, password});
     }
 
     return (
