@@ -14,7 +14,7 @@ const UserTrainingsContainer: React.FC<PropTypes> = (props) => {
     }
     let items = (props.trainings.length > 0? 
         props.trainings.map((item, index) => <UserTrainingItem data = {item} locked = {index >= firstLockedTraining - 1} key = {item.trainingNumber} />)
-        :<div>No training</div>);
+        :<div className = 'no-trainings'>No training</div>);
     return(
         <div className = "user-trainings-container">
             {items}

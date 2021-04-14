@@ -10,3 +10,9 @@
 .user-trainings-container:first-child{
     border-top: 1px solid  #f3f7f7;
 }
+
+.no-trainings{
+    box-sizing: border-box;
+    background-color: white;
+    padding: 5px 10px 5px 10px;
+}

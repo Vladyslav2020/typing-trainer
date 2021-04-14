@@ -1,0 +1,75 @@
+.training-page{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+}
+
+.training-title{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #1eb8b8;
+}
+
+.training-text{
+    display: flex;
+    justify-content: space-around;
+    flex-flow: wrap column;
+    color: rgb(104, 104, 104);
+    font-size: 20px;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 5px 1px rgb(214, 214, 214);
+    max-width: 400px;
+}
+
+.training-text .chars-block{
+    max-height: 120px;
+    overflow: auto;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 2px solid rgb(194, 194, 194);
+}
+
+.training-text .char-item{
+    display: inline-block;
+    letter-spacing: 2px;
+    padding: 1px;
+    border: 1px solid white;
+}
+
+.training-text .chars-block .char-item.active{
+    border-color:#1eb8b8;
+}
+
+.training-text .char-item.wrong{
+    border-color: red;
+    background-color: rgb(255, 191, 191);
+}
+
+.training-input{
+    width: 100%;
+}
+
+.training-input textarea{
+    font-size: 20px;
+    color: rgb(104, 104, 104);
+    border: none;
+    outline: none;
+    resize: none;
+    height: 120px;
+    overflow: auto;
+    padding: 5px;
+    letter-spacing: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.training-keyboard{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}

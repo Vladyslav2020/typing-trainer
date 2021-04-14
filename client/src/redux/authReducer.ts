@@ -3,7 +3,14 @@ import { ActionInterface } from '../interfaces/actions';
 import { AuthState } from '../interfaces/authReducerI';
 import { SET_AUTH_DATA, RESET_AUTH_DATA } from './types';
 
-const initialState : AuthState = {
+const dataAuth = localStorage.getItem("auth");
+let parsedData: null | AuthState = null;
+
+if (typeof dataAuth === 'string')
+    parsedData = JSON.parse(dataAuth);
+
+
+const initialState : AuthState = parsedData || {
     id: "",
     email: "",
     name: "", 

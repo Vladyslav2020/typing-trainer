@@ -13,7 +13,7 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropTypes = ConnectedProps<typeof connector>
 
-let shouldComponentUpdate = false;
+let needToLoadData = false;
 
 const TrainingsPage: React.FC<PropTypes> = (props) => {
     const arr: number[] = [];
@@ -22,9 +22,9 @@ const TrainingsPage: React.FC<PropTypes> = (props) => {
     console.log(1);
     useMemo(() => {
         console.log(2);
-        shouldComponentUpdate = true;
+        needToLoadData = true;
         props.addUserTrainings(arr, props.auth.token);
-    }, [shouldComponentUpdate])
+    }, [needToLoadData])
     return (
         <React.Fragment>
             <Header />

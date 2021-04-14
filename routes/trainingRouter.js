@@ -37,9 +37,9 @@ router.post('/add', async (req, res) => {
 
 router.get('/get', auth, async(req, res) => {
     try{
-        const number = req.body;
+        const number = req.query.number;
         const user = await User.findOne({_id: req.user.userId});
-        if (user.numberCompletedTrainings + 1 <= number){
+        if (user.numberCompletedTrainings + 1 >= number){
             const training = await Training.findOne({number});
             if (!training){
                 return res.status(400).json({message: "Invalid training number"});

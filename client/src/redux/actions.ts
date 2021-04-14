@@ -3,9 +3,10 @@ import { ActionCreator, AnyAction } from 'redux';
 import { ActionInterface } from '../interfaces/actions';
 import { AuthState } from '../interfaces/authReducerI';
 import { MessageType } from '../interfaces/messageReducerI';
-import { RegisterResponceType, SignInResponseType, UserTrainingResponseType } from '../interfaces/responseI';
+import { RegisterResponceType, SignInResponseType, TrainingResponseType, UserTrainingResponseType } from '../interfaces/responseI';
+import { Training } from '../interfaces/trainingReducerI';
 import { UserTrainingI } from '../interfaces/userTrainingsReducerI';
-import { ADD_USER_TRAINING_DATA, SET_AUTH_DATA, SET_MESSAGE } from './types';
+import { ADD_USER_TRAINING_DATA, SET_AUTH_DATA, SET_MESSAGE, SET_TRAINING } from './types';
 
 export const setAuthData:ActionCreator<ActionInterface<AuthState>> = (data: AuthState) => {
     return {
@@ -100,6 +101,38 @@ export const addUserTrainings = (numbers: Array<number>, token: string) => {
         }
         catch(err){
             console.log("Error: ", err.message);
+        }
+    }
+}
+
+export const setTraining = (data: Training) =>{
+    return{
+        type: SET_TRAINING,
+        payload: data
+    };
+}
+
+export const addTraining = (number: number, token: string) => {
+    return async(dispatch: Dispatch<any>) => {
+        try{
+            const response = await fetch(`http://localhost:5000/api/training/get?number=${number}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            const data: TrainingResponseType = await response.json();
+            if (typeof data.message === 'string'){
+                dispatch(setMessage(data.message));
+            }
+            else{
+                data.message.text = data.message.text.split('').map(item => item === '\n'? ' ': item).join('');
+                dispatch(setTraining(data.message));
+            }
+        }
+        catch(err){
+            console.log("Error:", err.message);
         }
     }
 }

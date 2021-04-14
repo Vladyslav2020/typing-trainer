@@ -1,4 +1,5 @@
 import { AuthState } from "./authReducerI";
+import { Training } from "./trainingReducerI";
 import { UserTrainingI } from "./userTrainingsReducerI";
 
 export interface RegisterResponceType{
@@ -11,4 +12,8 @@ export interface SignInResponseType{
 
 export interface UserTrainingResponseType{
     message: string | UserTrainingI;
+}
+
+export interface TrainingResponseType{
+    message: string | Training;
 }
